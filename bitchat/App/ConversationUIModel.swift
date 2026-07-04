@@ -78,6 +78,12 @@ final class ConversationUIModel: ObservableObject {
         }
     }
 
+    /// Mesh counterpart of `block(peerID:displayName:)` — routes through the
+    /// same /unblock command the composer accepts.
+    func unblock(displayName: String) {
+        chatViewModel.sendMessage("/unblock \(displayName)")
+    }
+
     func updateAutocomplete(for text: String, cursorPosition: Int) {
         chatViewModel.updateAutocomplete(for: text, cursorPosition: cursorPosition)
     }
