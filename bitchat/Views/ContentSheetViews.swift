@@ -235,7 +235,7 @@ private struct ContentPeopleListView: View {
                             },
                             onToggleBlock: { peer in
                                 if peer.isBlocked {
-                                    conversationUIModel.unblock(displayName: peer.displayName)
+                                    conversationUIModel.unblock(peerID: peer.peerID, displayName: peer.displayName)
                                 } else {
                                     conversationUIModel.block(peerID: peer.peerID, displayName: peer.displayName)
                                 }

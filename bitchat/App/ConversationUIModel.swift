@@ -78,15 +78,25 @@ final class ConversationUIModel: ObservableObject {
         if let peerID, peerID.isGeoChat,
            let full = chatViewModel.fullNostrHex(forSenderPeerID: peerID) {
             chatViewModel.blockGeohashUser(pubkeyHexLowercased: full, displayName: displayName)
+        } else if let peerID, !peerID.isGeoDM, !peerID.isGeoChat {
+            // Mesh: block the peer's stable Noise identity resolved from the
+            // tapped peerID rather than re-resolving a display-name string.
+            chatViewModel.blockMeshPeer(peerID: peerID, displayName: displayName)
         } else {
             chatViewModel.sendMessage("/block \(displayName)")
         }
     }
 
-    /// Mesh counterpart of `block(peerID:displayName:)` — routes through the
-    /// same /unblock command the composer accepts.
-    func unblock(displayName: String) {
-        chatViewModel.sendMessage("/unblock \(displayName)")
+    /// Mesh counterpart of `block(peerID:displayName:)`. Resolves the block by
+    /// the tapped peer's stable identity so the exact row is unblocked — this
+    /// also works for offline peers, which the `/unblock <displayName>` command
+    /// cannot resolve.
+    func unblock(peerID: PeerID?, displayName: String) {
+        if let peerID, !peerID.isGeoDM, !peerID.isGeoChat {
+            chatViewModel.unblockMeshPeer(peerID: peerID, displayName: displayName)
+        } else {
+            chatViewModel.sendMessage("/unblock \(displayName)")
+        }
     }
 
     func updateAutocomplete(for text: String, cursorPosition: Int) {
