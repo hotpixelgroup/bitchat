@@ -132,6 +132,11 @@ struct MessageListView: View {
                                     pb.setString(message.content, forType: .string)
                                     #endif
                                 }
+                                if isResendableFailedMessage(message) {
+                                    Button("content.actions.resend") {
+                                        conversationUIModel.sendMessage(message.content)
+                                    }
+                                }
                                 if showsUserActions {
                                     Button("content.actions.block", role: .destructive) {
                                         conversationUIModel.block(peerID: message.senderPeerID, displayName: message.sender)
@@ -308,6 +313,17 @@ private extension MessageListView {
         let appended = max(0, newCount - lastSeenMessageCount)
         lastSeenMessageCount = newCount
         return appended
+    }
+
+    /// A failed private text message of our own can be resent through the
+    /// normal send path (the context menu re-submits its content).
+    func isResendableFailedMessage(_ message: BitchatMessage) -> Bool {
+        guard message.isPrivate,
+              conversationUIModel.isSentByCurrentUser(message),
+              conversationUIModel.mediaAttachment(for: message) == nil,
+              case .some(.failed) = message.deliveryStatus
+        else { return false }
+        return true
     }
 
     /// Appends an @mention to the composer draft (never overwrites what the
