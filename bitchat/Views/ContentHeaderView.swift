@@ -18,20 +18,46 @@ struct ContentHeaderView: View {
     @Binding var notesGeohash: String?
     var isNicknameFieldFocused: FocusState<Bool>.Binding
 
+    // Panic-wipe arming: the first triple-tap arms (red "tap again to wipe"
+    // for a short window), the next tap executes. Keeps the duress feature
+    // fast while making an accidental triple-tap recoverable.
+    @State private var panicArmed = false
+    @State private var showWipedNotice = false
+    @State private var panicStateResetTask: Task<Void, Never>?
+
     let headerHeight: CGFloat
     let headerPeerIconSize: CGFloat
     let headerPeerCountFontSize: CGFloat
 
     var body: some View {
         HStack(spacing: 0) {
-            Text(verbatim: "bitchat/")
+            Text(verbatim: logoTitle)
                 .bitchatFont(size: 18, weight: .medium)
-                .foregroundColor(palette.primary)
+                .lineLimit(1)
+                .foregroundColor(panicArmed || showWipedNotice ? palette.alertRed : palette.primary)
                 .onTapGesture(count: 3) {
-                    appChromeModel.panicClearAllData()
+                    handlePanicGesture()
                 }
                 .onTapGesture(count: 1) {
-                    appChromeModel.presentAppInfo()
+                    if panicArmed {
+                        executePanicWipe()
+                    } else {
+                        appChromeModel.presentAppInfo()
+                    }
+                }
+                .accessibilityAddTraits(.isButton)
+                .accessibilityLabel(logoAccessibilityLabel)
+                .accessibilityAction(named: Text("content.accessibility.panic_wipe", comment: "Name of the accessibility action that arms and executes the panic wipe")) {
+                    handlePanicGesture()
+                }
+                .onDisappear {
+                    // Disarm rather than latch: if a cover (image picker, sheet)
+                    // hides the header mid-window, the cancelled reset task must
+                    // not leave the armed state waiting for a stray tap.
+                    panicStateResetTask?.cancel()
+                    panicStateResetTask = nil
+                    panicArmed = false
+                    showWipedNotice = false
                 }
 
             HStack(spacing: 0) {
@@ -264,6 +290,74 @@ private extension View {
 private extension ContentHeaderView {
     var headerLineLimit: Int? {
         dynamicTypeSize.isAccessibilitySize ? 2 : 1
+    }
+
+    var logoTitle: String {
+        if panicArmed {
+            return String(localized: "content.header.panic_armed", comment: "Header text shown while the panic wipe is armed and awaiting a confirming tap")
+        }
+        if showWipedNotice {
+            return String(localized: "content.header.panic_wiped", comment: "Transient header text confirming the panic wipe completed")
+        }
+        return "bitchat/"
+    }
+
+    var logoAccessibilityLabel: String {
+        if panicArmed {
+            return String(localized: "content.accessibility.panic_confirm", comment: "Accessibility label for the header logo while a panic wipe is armed")
+        }
+        if showWipedNotice {
+            return String(localized: "content.accessibility.panic_wiped", comment: "Accessibility label for the header logo right after a panic wipe completed")
+        }
+        return String(localized: "content.accessibility.app_info", comment: "Accessibility label for the header logo that opens app info")
+    }
+
+    func handlePanicGesture() {
+        if panicArmed {
+            executePanicWipe()
+        } else {
+            armPanicWipe()
+        }
+    }
+
+    func armPanicWipe() {
+        panicStateResetTask?.cancel()
+        showWipedNotice = false
+        panicArmed = true
+        announceForAccessibility(
+            String(localized: "content.accessibility.panic_confirm", comment: "Accessibility label for the header logo while a panic wipe is armed")
+        )
+        panicStateResetTask = Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            guard !Task.isCancelled else { return }
+            panicArmed = false
+        }
+    }
+
+    func executePanicWipe() {
+        panicStateResetTask?.cancel()
+        panicArmed = false
+        appChromeModel.panicClearAllData()
+        #if os(iOS)
+        UINotificationFeedbackGenerator().notificationOccurred(.warning)
+        #endif
+        announceForAccessibility(
+            String(localized: "content.accessibility.panic_wiped", comment: "Accessibility label for the header logo right after a panic wipe completed")
+        )
+        // Transient on purpose: a persistent "wiped" line would itself be
+        // evidence of the wipe if the device is inspected afterwards.
+        showWipedNotice = true
+        panicStateResetTask = Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 2_500_000_000)
+            guard !Task.isCancelled else { return }
+            showWipedNotice = false
+        }
+    }
+
+    func announceForAccessibility(_ message: String) {
+        #if os(iOS)
+        UIAccessibility.post(notification: .announcement, argument: message)
+        #endif
     }
 
     func channelPeopleCountAndColor() -> (Int, Color) {

@@ -4299,6 +4299,18 @@
         }
       }
     },
+    "app_info.how_to_use.message_actions" : {
+      "comment" : "How-to-use bullet describing the per-message long-press menu",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\u2022 long-press a message for actions"
+          }
+        }
+      }
+    },
     "app_info.how_to_use.open_sidebar" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5736,176 +5748,176 @@
       "localizations" : {
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "اضغط الشعار ثلاث مرات لمسح كل البيانات فوراً"
+            "state" : "needs_review",
+            "value" : "انقر ثلاث مرات على الشعار، ثم انقر مرة أخرى لمسح كل البيانات"
           }
         },
         "bn" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "লোগোতে তিনবার ট্যাপ করলে সঙ্গে সঙ্গে সব ডেটা মুছে যাবে"
+            "state" : "needs_review",
+            "value" : "লোগোতে তিনবার ট্যাপ করুন, তারপর সব ডেটা মুছতে আবার ট্যাপ করুন"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "tippe dreimal auf das logo, um alle daten sofort zu löschen"
+            "state" : "needs_review",
+            "value" : "tippe dreimal auf das logo und dann erneut, um alle daten zu löschen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "triple-tap logo to instantly clear all data"
+            "value" : "triple-tap the logo, then tap again to erase all data"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "toca el logotipo tres veces para borrar todos los datos al instante"
+            "state" : "needs_review",
+            "value" : "toca tres veces el logo y luego toca de nuevo para borrar todos los datos"
           }
         },
         "fil" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "i-tap ang logo nang tatlong beses para agad burahin ang lahat ng data"
+            "state" : "needs_review",
+            "value" : "i-tap nang tatlong beses ang logo, pagkatapos ay i-tap muli para burahin ang lahat ng data"
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "tape trois fois sur le logo pour tout effacer instantanément"
+            "state" : "needs_review",
+            "value" : "touchez trois fois le logo, puis touchez à nouveau pour effacer toutes les données"
           }
         },
         "he" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "הקש על הלוגו שלוש פעמים למחיקת כל הנתונים מייד"
+            "state" : "needs_review",
+            "value" : "הקש שלוש פעמים על הלוגו, ואז הקש שוב כדי למחוק את כל הנתונים"
           }
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "लोगो पर तीन बार टैप करें और तुरंत सारा डेटा साफ़ करें"
+            "state" : "needs_review",
+            "value" : "लोगो पर तीन बार टैप करें, फिर सारा डेटा मिटाने के लिए दोबारा टैप करें"
           }
         },
         "id" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "ketuk logo tiga kali untuk langsung menghapus semua data"
+            "state" : "needs_review",
+            "value" : "ketuk logo tiga kali, lalu ketuk lagi untuk menghapus semua data"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "tocca il logo tre volte per cancellare subito tutti i dati"
+            "state" : "needs_review",
+            "value" : "tocca tre volte il logo, poi tocca di nuovo per cancellare tutti i dati"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "ロゴを3回タップすると全データを即削除"
+            "state" : "needs_review",
+            "value" : "ロゴを3回タップし、もう一度タップすると全データを消去します"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "로고를 세 번 탭하여 모든 데이터 즉시 삭제할 수 있습니다"
+            "state" : "needs_review",
+            "value" : "로고를 세 번 탭한 뒤 다시 탭하면 모든 데이터가 삭제됩니다"
           }
         },
         "ms" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "ketuk logo tiga kali untuk langsung menghapus semua data"
+            "state" : "needs_review",
+            "value" : "ketik logo tiga kali, kemudian ketik sekali lagi untuk memadam semua data"
           }
         },
         "ne" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "लगो तीन पटक ट्याप गर्दा सबै डाटा तुरुन्त मेटिन्छ"
+            "state" : "needs_review",
+            "value" : "लोगोमा तीन पटक ट्याप गर्नुहोस्, त्यसपछि सबै डेटा मेटाउन फेरि ट्याप गर्नुहोस्"
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "tik drie keer op het logo om alle data direct te wissen"
+            "state" : "needs_review",
+            "value" : "tik drie keer op het logo en tik daarna nogmaals om alle gegevens te wissen"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "stuknij logo trzy razy, aby natychmiast usunąć wszystkie dane"
+            "state" : "needs_review",
+            "value" : "stuknij logo trzy razy, a następnie stuknij ponownie, aby usunąć wszystkie dane"
           }
         },
         "pt" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "toca três vezes no logótipo para limpar todos os dados de imediato"
+            "state" : "needs_review",
+            "value" : "toque três vezes no logótipo e depois toque novamente para apagar todos os dados"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "toque o logo três vezes para limpar todos os dados instantaneamente"
+            "state" : "needs_review",
+            "value" : "toque três vezes no logo e depois toque novamente para apagar todos os dados"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "тройной тап по логотипу мгновенно очищает все данные"
+            "state" : "needs_review",
+            "value" : "трижды коснитесь логотипа, затем коснитесь ещё раз, чтобы стереть все данные"
           }
         },
         "sv" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "tryck tre gånger på logotypen för att radera all data direkt"
+            "state" : "needs_review",
+            "value" : "tryck tre gånger på logotypen och tryck sedan igen för att radera all data"
           }
         },
         "ta" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "எல்லா தரவையும் உடனடியாக நீக்க லோகோவை மூன்று முறைத் தட்டுங்கள்"
+            "state" : "needs_review",
+            "value" : "லோகோவை மூன்று முறை தட்டவும், பின்னர் எல்லா தரவையும் அழிக்க மீண்டும் தட்டவும்"
           }
         },
         "th" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "แตะโลโก้สามครั้งเพื่อลบข้อมูลทั้งหมดทันที"
+            "state" : "needs_review",
+            "value" : "แตะโลโก้สามครั้ง แล้วแตะอีกครั้งเพื่อลบข้อมูลทั้งหมด"
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "logoya üç kez dokunun, tüm veriler anında silinsin"
+            "state" : "needs_review",
+            "value" : "logoya üç kez dokunun, ardından tüm verileri silmek için tekrar dokunun"
           }
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "тричі торкни логотип, щоб миттєво стерти всі дані"
+            "state" : "needs_review",
+            "value" : "тричі торкніться логотипа, потім торкніться ще раз, щоб стерти всі дані"
           }
         },
         "ur" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "تمام ڈیٹا فوری صاف کرنے کیلئے لوگو پر تین بار ٹیپ کریں"
+            "state" : "needs_review",
+            "value" : "لوگو پر تین بار ٹیپ کریں، پھر تمام ڈیٹا مٹانے کے لیے دوبارہ ٹیپ کریں"
           }
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "chạm logo ba lần để xóa toàn bộ dữ liệu ngay lập tức"
+            "state" : "needs_review",
+            "value" : "chạm ba lần vào logo, sau đó chạm lần nữa để xoá toàn bộ dữ liệu"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "三击标志立即清除全部数据"
+            "state" : "needs_review",
+            "value" : "三击标志，然后再点一次即可清除所有数据"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "三擊標誌立即清除全部數據"
+            "state" : "needs_review",
+            "value" : "三擊標誌，然後再點一次即可清除所有資料"
           }
         }
       }
@@ -6085,6 +6097,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "緊急模式"
+          }
+        }
+      }
+    },
+    "app_info.privacy.panic_button" : {
+      "comment" : "Destructive button in app info that erases all data (visible entry point for the panic wipe)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "panic wipe — erase all data now"
+          }
+        }
+      }
+    },
+    "app_info.privacy.panic_confirm_action" : {
+      "comment" : "Destructive confirmation button that executes the panic wipe",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "erase everything"
+          }
+        }
+      }
+    },
+    "app_info.privacy.panic_confirm_message" : {
+      "comment" : "Body of the confirmation dialog shown before the panic wipe",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "this permanently deletes your identity, keys, favorites, and all messages. there is no undo."
+          }
+        }
+      }
+    },
+    "app_info.privacy.panic_confirm_title" : {
+      "comment" : "Title of the confirmation dialog shown before the panic wipe",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "erase all data?"
           }
         }
       }
@@ -8416,6 +8476,18 @@
         }
       }
     },
+    "content.accessibility.app_info" : {
+      "comment" : "Accessibility label for the header logo that opens app info",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "about bitchat"
+          }
+        }
+      }
+    },
     "content.accessibility.available_nostr" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -9132,6 +9204,18 @@
         }
       }
     },
+    "content.accessibility.jump_to_latest" : {
+      "comment" : "Accessibility label for the jump to latest messages button",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "jump to latest messages"
+          }
+        }
+      }
+    },
     "content.accessibility.location_channels" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -9665,6 +9749,42 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "打開未讀私聊"
+          }
+        }
+      }
+    },
+    "content.accessibility.panic_confirm" : {
+      "comment" : "Accessibility label for the header logo while a panic wipe is armed",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "confirm panic wipe: erases all data"
+          }
+        }
+      }
+    },
+    "content.accessibility.panic_wipe" : {
+      "comment" : "Name of the accessibility action that arms and executes the panic wipe",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "panic wipe all data"
+          }
+        }
+      }
+    },
+    "content.accessibility.panic_wiped" : {
+      "comment" : "Accessibility label for the header logo right after a panic wipe completed",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "all data wiped"
           }
         }
       }
@@ -14170,6 +14290,30 @@
         }
       }
     },
+    "content.clear.confirm_action" : {
+      "comment" : "Destructive confirmation button that clears the current chat",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "clear chat"
+          }
+        }
+      }
+    },
+    "content.clear.confirm_title" : {
+      "comment" : "Title of the confirmation dialog shown before clearing the current chat",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "clear this chat?"
+          }
+        }
+      }
+    },
     "content.commands.block" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -17392,6 +17536,198 @@
         }
       }
     },
+    "content.header.panic_armed" : {
+      "comment" : "Header text shown while the panic wipe is armed and awaiting a confirming tap",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "انقر للمسح"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "মুছতে ট্যাপ করুন"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "zum löschen tippen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tap to wipe"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "toca para borrar"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "i-tap para burahin"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "touchez pour effacer"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "הקש למחיקה"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "मिटाने के लिए टैप करें"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ketuk untuk menghapus"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "tocca per cancellare"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "タップで消去"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "탭하여 삭제"
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ketik untuk padam"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "मेटाउन ट्याप गर्नुहोस्"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "tik om te wissen"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "stuknij, aby usunąć"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "toque para apagar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "toque para apagar"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "коснитесь, чтобы стереть"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "tryck för att radera"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "அழிக்க தட்டவும்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "แตะเพื่อลบ"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "silmek için dokunun"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "торкніться, щоб стерти"
+          }
+        },
+        "ur" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "مٹانے کے لیے ٹیپ کریں"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "chạm để xoá"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "点按以清除"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "點按以清除"
+          }
+        }
+      }
+    },
+    "content.header.panic_wiped" : {
+      "comment" : "Transient header text confirming the panic wipe completed",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "* wiped *"
+          }
+        }
+      }
+    },
     "content.header.people" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -18104,6 +18440,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "暱稱"
+          }
+        }
+      }
+    },
+    "content.jump.new_count" : {
+      "comment" : "Count of messages that arrived while scrolled up, shown in the jump-to-latest pill",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld new"
           }
         }
       }

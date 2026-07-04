@@ -1,9 +1,14 @@
 import SwiftUI
 
 struct AppInfoView: View {
+    /// Wipes all app data when the user confirms the panic row. Optional so
+    /// previews (and any caller without runtime models) simply hide the row.
+    var onPanicWipe: (() -> Void)? = nil
+
     @Environment(\.dismiss) var dismiss
     @ThemedPalette private var palette
     @AppStorage(AppTheme.storageKey) private var appThemeRawValue = AppTheme.matrix.rawValue
+    @State private var showPanicConfirmation = false
 
     private var selectedTheme: AppTheme {
         AppTheme(rawValue: appThemeRawValue) ?? .matrix
@@ -81,6 +86,7 @@ struct AppInfoView: View {
                 "app_info.how_to_use.change_channels",
                 "app_info.how_to_use.open_sidebar",
                 "app_info.how_to_use.start_dm",
+                "app_info.how_to_use.message_actions",
                 "app_info.how_to_use.clear_chat",
                 "app_info.how_to_use.commands"
             ]
@@ -211,9 +217,48 @@ struct AppInfoView: View {
                 FeatureRow(info: Strings.Privacy.ephemeral)
 
                 FeatureRow(info: Strings.Privacy.panic)
+
+                if onPanicWipe != nil {
+                    panicWipeRow
+                }
             }
         }
         .padding()
+    }
+
+    /// Visible entry point for the panic wipe, so the duress feature is
+    /// discoverable without knowing the hidden triple-tap gesture.
+    private var panicWipeRow: some View {
+        Button(role: .destructive) {
+            showPanicConfirmation = true
+        } label: {
+            HStack(alignment: .top, spacing: 12) {
+                Image(systemName: "trash.fill")
+                    .font(.bitchatSystem(size: 20))
+                    .frame(width: 30)
+
+                Text("app_info.privacy.panic_button")
+                    .bitchatFont(size: 14, weight: .semibold)
+
+                Spacer()
+            }
+            .foregroundColor(palette.alertRed)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .confirmationDialog(
+            "app_info.privacy.panic_confirm_title",
+            isPresented: $showPanicConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("app_info.privacy.panic_confirm_action", role: .destructive) {
+                dismiss()
+                onPanicWipe?()
+            }
+            Button("common.cancel", role: .cancel) {}
+        } message: {
+            Text("app_info.privacy.panic_confirm_message")
+        }
     }
 }
 

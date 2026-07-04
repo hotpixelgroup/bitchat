@@ -36,8 +36,17 @@ struct MessageListView: View {
     var isTextFieldFocused: FocusState<Bool>.Binding
 
     @State private var showMessageActions = false
+    @State private var showClearConfirmation = false
     @State private var lastScrollTime: Date = .distantPast
     @State private var scrollThrottleTimer: Timer?
+    @State private var unseenCount = 0
+    @State private var lastSeenMessageCount = 0
+    /// Context key the unseen counters were baselined against. Channel
+    /// switches swap the timeline wholesale, so a count delta is only a
+    /// "new messages" signal while the context is unchanged.
+    @State private var unseenBaselineKey = ""
+
+    @ThemedPalette private var palette
 
     var body: some View {
         let currentWindowCount: Int = {
@@ -72,6 +81,7 @@ struct MessageListView: View {
                             .onAppear {
                                 if message.id == windowedMessages.last?.id {
                                     isAtBottom = true
+                                    unseenCount = 0
                                 }
                                 if message.id == windowedMessages.first?.id,
                                    messages.count > windowedMessages.count {
@@ -89,13 +99,27 @@ struct MessageListView: View {
                                 }
                             }
                             .contentShape(Rectangle())
-                            .onTapGesture {
-                                if message.sender != "system" {
-                                    messageText = "@\(message.sender) "
-                                    isTextFieldFocused.wrappedValue = true
-                                }
-                            }
                             .contextMenu {
+                                let showsUserActions = message.sender != "system" && !conversationUIModel.isSentByCurrentUser(message)
+                                if showsUserActions {
+                                    Button("content.actions.mention") {
+                                        insertMention(message.sender)
+                                    }
+                                    if let peerID = message.senderPeerID {
+                                        Button("content.actions.direct_message") {
+                                            privateConversationModel.openConversation(for: peerID)
+                                            withAnimation(.easeInOut(duration: TransportConfig.uiAnimationMediumSeconds)) {
+                                                showSidebar = true
+                                            }
+                                        }
+                                    }
+                                    Button("content.actions.hug") {
+                                        conversationUIModel.sendHug(to: message.sender)
+                                    }
+                                    Button("content.actions.slap") {
+                                        conversationUIModel.sendSlap(to: message.sender)
+                                    }
+                                }
                                 Button("content.message.copy") {
                                     #if os(iOS)
                                     UIPasteboard.general.string = message.content
@@ -105,6 +129,11 @@ struct MessageListView: View {
                                     pb.setString(message.content, forType: .string)
                                     #endif
                                 }
+                                if showsUserActions {
+                                    Button("content.actions.block", role: .destructive) {
+                                        conversationUIModel.block(peerID: message.senderPeerID, displayName: message.sender)
+                                    }
+                                }
                             }
                             .padding(.horizontal, 12)
                             .padding(.vertical, 1)
@@ -113,9 +142,24 @@ struct MessageListView: View {
                 .transaction { tx in if conversationUIModel.isBatchingPublic { tx.disablesAnimations = true } }
                 .padding(.vertical, 2)
             }
+            .overlay(alignment: .bottomTrailing) {
+                if !isAtBottom && !messageItems.isEmpty {
+                    jumpToLatestPill(proxy: proxy)
+                }
+            }
             .onOpenURL(perform: handleOpenURL)
             .onTapGesture(count: 3) {
-                conversationUIModel.clearCurrentConversation()
+                showClearConfirmation = true
+            }
+            .confirmationDialog(
+                "content.clear.confirm_title",
+                isPresented: $showClearConfirmation,
+                titleVisibility: .visible
+            ) {
+                Button("content.clear.confirm_action", role: .destructive) {
+                    conversationUIModel.clearCurrentConversation()
+                }
+                Button("common.cancel", role: .cancel) {}
             }
             .onAppear {
                 scrollToBottom(on: proxy)
@@ -139,9 +183,7 @@ struct MessageListView: View {
             ) {
                 Button("content.actions.mention") {
                     if let sender = selectedMessageSender {
-                        // Pre-fill the input with an @mention and focus the field
-                        messageText = "@\(sender) "
-                        isTextFieldFocused.wrappedValue = true
+                        insertMention(sender)
                     }
                 }
 
@@ -208,6 +250,88 @@ struct MessageListView: View {
 }
 
 private extension MessageListView {
+    var currentContextKey: String {
+        if let peer = privatePeer {
+            return "dm:\(peer)"
+        }
+        return locationChannelsModel.selectedChannel.contextKey
+    }
+
+    /// Updates the unseen-count baseline for the current context and returns
+    /// how many messages were appended since the last observation. A context
+    /// change (timeline swapped wholesale) re-baselines and reports zero, so
+    /// cross-channel count differences are never booked as "new" messages.
+    func rebaselinedAppendedCount(newCount: Int) -> Int {
+        let key = currentContextKey
+        if unseenBaselineKey != key {
+            unseenBaselineKey = key
+            unseenCount = 0
+            lastSeenMessageCount = newCount
+            return 0
+        }
+        let appended = max(0, newCount - lastSeenMessageCount)
+        lastSeenMessageCount = newCount
+        return appended
+    }
+
+    /// Appends an @mention to the composer draft (never overwrites what the
+    /// user has already typed) and focuses the input field.
+    func insertMention(_ sender: String) {
+        let mention = "@\(sender) "
+        if messageText.isEmpty {
+            messageText = mention
+        } else if messageText.hasSuffix(" ") {
+            messageText += mention
+        } else {
+            messageText += " " + mention
+        }
+        isTextFieldFocused.wrappedValue = true
+    }
+
+    /// Floating pill shown while scrolled up: re-presents the isAtBottom /
+    /// unseenCount state the view already tracks, and jumps to the newest
+    /// message via the existing scrollToBottom helper.
+    func jumpToLatestPill(proxy: ScrollViewProxy) -> some View {
+        Button {
+            scrollToBottom(on: proxy)
+        } label: {
+            HStack(spacing: 4) {
+                Image(systemName: "arrow.down")
+                    .font(.bitchatSystem(size: 11, weight: .semibold))
+                if unseenCount > 0 {
+                    Text(
+                        String(
+                            format: String(localized: "content.jump.new_count", comment: "Count of messages that arrived while scrolled up, shown in the jump-to-latest pill"),
+                            locale: .current,
+                            unseenCount
+                        )
+                    )
+                    .bitchatFont(size: 12, weight: .medium)
+                }
+            }
+            .foregroundColor(palette.primary)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .themedOverlayPanel()
+        .padding(.trailing, 12)
+        .padding(.bottom, 10)
+        .accessibilityLabel(jumpToLatestAccessibilityLabel)
+    }
+
+    var jumpToLatestAccessibilityLabel: String {
+        let base = String(localized: "content.accessibility.jump_to_latest", comment: "Accessibility label for the jump to latest messages button")
+        guard unseenCount > 0 else { return base }
+        let count = String(
+            format: String(localized: "content.jump.new_count", comment: "Count of messages that arrived while scrolled up, shown in the jump-to-latest pill"),
+            locale: .current,
+            unseenCount
+        )
+        return "\(base), \(count)"
+    }
+
     @ViewBuilder
     func messageRow(for message: BitchatMessage) -> some View {
         Group {
@@ -294,6 +418,9 @@ private extension MessageListView {
 
     func scrollToBottom(on proxy: ScrollViewProxy) {
         isAtBottom = true
+        unseenCount = 0
+        lastSeenMessageCount = conversationMessages(for: privatePeer).count
+        unseenBaselineKey = currentContextKey
         if let targetPeerID {
             proxy.scrollTo(targetPeerID, anchor: .bottom)
         }
@@ -316,15 +443,23 @@ private extension MessageListView {
     }
 
     func onMessagesChange(proxy: ScrollViewProxy) {
+        guard privatePeer == nil else { return }
         let messages = publicChatModel.messages
-        guard privatePeer == nil, let lastMsg = messages.last else { return }
+        let appendedCount = rebaselinedAppendedCount(newCount: messages.count)
+        guard let lastMsg = messages.last else {
+            // Timeline emptied (e.g. /clear): nothing below to jump to.
+            unseenCount = 0
+            return
+        }
 
         // If the newest message is from me, always scroll to bottom
         let isFromSelf = conversationUIModel.isSentByCurrentUser(lastMsg)
         if !isFromSelf && !isAtBottom { // Only autoscroll when user is at/near bottom
+            unseenCount += appendedCount
             return
         } else { // Ensure we consider ourselves at bottom for subsequent messages
             isAtBottom = true
+            unseenCount = 0
         }
 
         func scrollIfNeeded(date: Date) {
@@ -352,18 +487,23 @@ private extension MessageListView {
     }
 
     func onPrivateChatsChange(proxy: ScrollViewProxy) {
-        guard let peerID = privatePeer,
-              let lastMsg = privateInboxModel.messages(for: peerID).last else {
+        guard let peerID = privatePeer else { return }
+        let messages = privateInboxModel.messages(for: peerID)
+        let appendedCount = rebaselinedAppendedCount(newCount: messages.count)
+        guard let lastMsg = messages.last else {
+            // Timeline emptied (e.g. /clear): nothing below to jump to.
+            unseenCount = 0
             return
         }
-        let messages = privateInboxModel.messages(for: peerID)
 
         // If the newest private message is from me, always scroll
         let isFromSelf = conversationUIModel.isSentByCurrentUser(lastMsg)
         if !isFromSelf && !isAtBottom { // Only autoscroll when user is at/near bottom
+            unseenCount += appendedCount
             return
         } else {
             isAtBottom = true
+            unseenCount = 0
         }
 
         func scrollIfNeeded(date: Date) {
@@ -391,6 +531,12 @@ private extension MessageListView {
     func onSelectedChannelChange(_ channel: ChannelID, proxy: ScrollViewProxy) {
         // When switching to a new geohash channel, scroll to the bottom
         guard privatePeer == nil else { return }
+        // Invalidate the unseen baseline: the timeline is about to swap (or
+        // already has — the ordering of this onChange vs the count onChange
+        // is not guaranteed), so the next count observation re-baselines
+        // instead of booking the cross-channel difference as "new".
+        unseenCount = 0
+        unseenBaselineKey = ""
         switch channel {
         case .mesh:
             break
