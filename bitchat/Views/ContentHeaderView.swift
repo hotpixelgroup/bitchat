@@ -2,6 +2,8 @@ import CoreBluetooth
 import SwiftUI
 #if os(iOS)
 import UIKit
+#elseif os(macOS)
+import AppKit
 #endif
 
 struct ContentHeaderView: View {
@@ -433,6 +435,17 @@ private extension ContentHeaderView {
     func announceForAccessibility(_ message: String) {
         #if os(iOS)
         UIAccessibility.post(notification: .announcement, argument: message)
+        #elseif os(macOS)
+        if let window = NSApp.keyWindow {
+            NSAccessibility.post(
+                element: window,
+                notification: .announcementRequested,
+                userInfo: [
+                    .announcement: message,
+                    .priority: NSAccessibilityPriorityLevel.high.rawValue
+                ]
+            )
+        }
         #endif
     }
 

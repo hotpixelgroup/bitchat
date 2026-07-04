@@ -362,6 +362,16 @@ struct ContentView: View {
         }()
 
         DispatchQueue.main.async {
+            // Sending puts you at the bottom — you want to see your own
+            // message. Assert it before the append(s) so the scroll/unseen
+            // logic treats this as a self-send even when a system line (e.g.
+            // the zero-peer hint) becomes the last row and would otherwise
+            // read as an incoming message.
+            if selectedPrivatePeerID == nil {
+                isAtBottomPublic = true
+            } else {
+                isAtBottomPrivate = true
+            }
             self.conversationUIModel.sendMessage(trimmed)
             if shouldExplainZeroPeers {
                 self.didShowZeroPeerNotice = true

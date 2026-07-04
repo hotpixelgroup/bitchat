@@ -589,17 +589,21 @@ private extension MessageListView {
         // instead of booking the cross-channel difference as "new".
         unseenCount = 0
         unseenBaselineKey = ""
+        // Entering any public channel shows its latest messages: a channel
+        // switch swaps the timeline wholesale, so the prior scroll offset is
+        // meaningless. Landing at the bottom keeps isAtBottom honest (no
+        // stale jump-to-latest pill) and matches standard chat behavior.
+        isAtBottom = true
+        windowCountPublic = TransportConfig.uiWindowInitialCountPublic
+        let contextKey: String
         switch channel {
         case .mesh:
-            break
+            contextKey = "mesh"
         case .location(let ch):
-            // Reset window size
-            isAtBottom = true
-            windowCountPublic = TransportConfig.uiWindowInitialCountPublic
-            let contextKey = "geo:\(ch.geohash)"
-            if let target = publicChatModel.messages.last?.id.map({ "\(contextKey)|\($0)" }) {
-                proxy.scrollTo(target, anchor: .bottom)
-            }
+            contextKey = "geo:\(ch.geohash)"
+        }
+        if let target = publicChatModel.messages.last?.id.map({ "\(contextKey)|\($0)" }) {
+            proxy.scrollTo(target, anchor: .bottom)
         }
     }
 
