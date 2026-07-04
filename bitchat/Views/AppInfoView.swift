@@ -72,6 +72,7 @@ struct AppInfoView: View {
                 ("mappin.and.ellipse", "app_info.legend.location_nearby"),
                 ("face.dashed", "app_info.legend.teleported"),
                 ("lock.fill", "app_info.legend.encrypted"),
+                ("lock.slash", "app_info.legend.encryption_failed"),
                 ("checkmark.seal.fill", "app_info.legend.verified"),
                 ("star.fill", "app_info.legend.favorite"),
                 ("envelope.fill", "app_info.legend.unread"),
