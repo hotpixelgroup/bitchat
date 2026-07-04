@@ -25137,175 +25137,175 @@
         "ar" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "راسل @%@ — خاص"
+            "value" : "راسل %@ — خاص"
           }
         },
         "bn" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "@%@-কে মেসেজ — ব্যক্তিগত"
+            "value" : "%@-কে মেসেজ — ব্যক্তিগত"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "nachricht an @%@ — privat"
+            "value" : "nachricht an %@ — privat"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "message @%@ — private"
+            "value" : "message %@ — private"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "mensaje a @%@ — privado"
+            "value" : "mensaje a %@ — privado"
           }
         },
         "fil" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "mensahe @%@ — pribado"
+            "value" : "mensahe %@ — pribado"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "message @%@ — privé"
+            "value" : "message %@ — privé"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "הודעה ל-@%@ — פרטי"
+            "value" : "הודעה ל-%@ — פרטי"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "@%@ को संदेश — निजी"
+            "value" : "%@ को संदेश — निजी"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "pesan @%@ — pribadi"
+            "value" : "pesan %@ — pribadi"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "messaggio a @%@ — privato"
+            "value" : "messaggio a %@ — privato"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "@%@ にメッセージ — プライベート"
+            "value" : "%@ にメッセージ — プライベート"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "@%@에게 메시지 — 비공개"
+            "value" : "%@에게 메시지 — 비공개"
           }
         },
         "ms" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "mesej @%@ — peribadi"
+            "value" : "mesej %@ — peribadi"
           }
         },
         "ne" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "@%@ लाई सन्देश — निजी"
+            "value" : "%@ लाई सन्देश — निजी"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "bericht naar @%@ — privé"
+            "value" : "bericht naar %@ — privé"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "wiadomość @%@ — prywatna"
+            "value" : "wiadomość %@ — prywatna"
           }
         },
         "pt" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "mensagem @%@ — privado"
+            "value" : "mensagem %@ — privado"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "mensagem para @%@ — privada"
+            "value" : "mensagem para %@ — privada"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "сообщение @%@ — личное"
+            "value" : "сообщение %@ — личное"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "meddela @%@ — privat"
+            "value" : "meddela %@ — privat"
           }
         },
         "ta" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "@%@ க்கு செய்தி — தனிப்பட்டது"
+            "value" : "%@ க்கு செய்தி — தனிப்பட்டது"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "ส่งข้อความ @%@ — ส่วนตัว"
+            "value" : "ส่งข้อความ %@ — ส่วนตัว"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "@%@ kişisine mesaj — özel"
+            "value" : "%@ kişisine mesaj — özel"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "повідомлення @%@ — приватне"
+            "value" : "повідомлення %@ — приватне"
           }
         },
         "ur" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "@%@ کو پیغام — نجی"
+            "value" : "%@ کو پیغام — نجی"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "nhắn tin @%@ — riêng tư"
+            "value" : "nhắn tin %@ — riêng tư"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "发消息给 @%@ ——私密"
+            "value" : "发消息给 %@ ——私密"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "傳訊息給 @%@ — 私人"
+            "value" : "傳訊息給 %@ — 私人"
           }
         }
       }
