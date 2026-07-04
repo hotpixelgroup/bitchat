@@ -347,11 +347,15 @@ struct ContentView: View {
         // A public mesh message sent with nobody in range echoes locally
         // exactly like a delivered one; narrate the silence once so the
         // sender knows why replies aren't coming. Local-only, one hint per
-        // zero-peer episode.
+        // zero-peer episode. Only when Bluetooth is actually on — with the
+        // radio off the packet never broadcasts and the "will sync" promise
+        // would be false (the persistent bluetooth status row explains that
+        // case instead).
         let shouldExplainZeroPeers: Bool = {
             guard !didShowZeroPeerNotice,
                   !trimmed.hasPrefix("/"),
                   selectedPrivatePeerID == nil,
+                  appChromeModel.bluetoothState == .poweredOn,
                   case .mesh = locationChannelsModel.selectedChannel
             else { return false }
             return peerListModel.reachableMeshPeerCount == 0

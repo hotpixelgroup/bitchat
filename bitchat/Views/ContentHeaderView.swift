@@ -354,6 +354,7 @@ private extension ContentHeaderView {
                 Text(verbatim: bluetoothStatusText)
                     .bitchatFont(size: 12)
                     .lineLimit(2)
+                    .minimumScaleFactor(0.75)
                 Spacer(minLength: 0)
             }
             .foregroundColor(palette.alertRed)

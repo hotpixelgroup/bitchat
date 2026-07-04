@@ -32,6 +32,7 @@ final class AppRuntime: ObservableObject {
     private let idBridge: NostrIdentityBridge
     private var cancellables = Set<AnyCancellable>()
     private var started = false
+    private var didRunFirstShareCheck = false
     private var lastNostrRelayConnectedState = false
     private var didHandleInitialNostrConnection = false
 
@@ -289,13 +290,22 @@ private extension AppRuntime {
     }
 
     func checkForSharedContent() {
+        // The first check of the process runs at cold launch, which the
+        // first-launch intro can defer past the staleness window. Accept a
+        // pending share on that first check regardless of age (staging it
+        // into the composer is safe — the user still confirms the send);
+        // later foreground checks apply the window to avoid re-acting on
+        // shares left over from an earlier session.
+        let isFirstCheck = !didRunFirstShareCheck
+        didRunFirstShareCheck = true
+
         guard let userDefaults = UserDefaults(suiteName: BitchatApp.groupID),
               let sharedContent = userDefaults.string(forKey: "sharedContent"),
               let sharedDate = userDefaults.object(forKey: "sharedContentDate") as? Date else {
             return
         }
 
-        guard Date().timeIntervalSince(sharedDate) < TransportConfig.uiShareAcceptWindowSeconds else {
+        guard isFirstCheck || Date().timeIntervalSince(sharedDate) < TransportConfig.uiShareAcceptWindowSeconds else {
             return
         }
 
