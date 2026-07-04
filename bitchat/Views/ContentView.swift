@@ -35,6 +35,8 @@ struct ContentView: View {
     @EnvironmentObject private var privateConversationModel: PrivateConversationModel
     @EnvironmentObject private var verificationModel: VerificationModel
     @EnvironmentObject private var conversationUIModel: ConversationUIModel
+    @EnvironmentObject private var locationChannelsModel: LocationChannelsModel
+    @EnvironmentObject private var peerListModel: PeerListModel
 
     @StateObject private var voiceRecordingVM = VoiceRecordingViewModel()
     @State private var messageText = ""
@@ -63,6 +65,8 @@ struct ContentView: View {
     @ScaledMetric(relativeTo: .subheadline) private var headerPeerCountFontSize: CGFloat = 12
     @State private var windowCountPublic: Int = 300
     @State private var windowCountPrivate: [PeerID: Int] = [:]
+    /// One hint per zero-peer episode: reset when peers come back into range.
+    @State private var didShowZeroPeerNotice = false
 
     @ThemedPalette private var palette
 
@@ -98,6 +102,11 @@ struct ContentView: View {
         .onChange(of: selectedPrivatePeerID) { newValue in
             if newValue != nil {
                 showSidebar = true
+            }
+        }
+        .onChange(of: peerListModel.reachableMeshPeerCount) { count in
+            if count > 0 {
+                didShowZeroPeerNotice = false
             }
         }
         .sheet(
@@ -321,8 +330,27 @@ struct ContentView: View {
 
         messageText = ""
 
+        // A public mesh message sent with nobody in range echoes locally
+        // exactly like a delivered one; narrate the silence once so the
+        // sender knows why replies aren't coming. Local-only, one hint per
+        // zero-peer episode.
+        let shouldExplainZeroPeers: Bool = {
+            guard !didShowZeroPeerNotice,
+                  !trimmed.hasPrefix("/"),
+                  selectedPrivatePeerID == nil,
+                  case .mesh = locationChannelsModel.selectedChannel
+            else { return false }
+            return peerListModel.reachableMeshPeerCount == 0
+        }()
+
         DispatchQueue.main.async {
             self.conversationUIModel.sendMessage(trimmed)
+            if shouldExplainZeroPeers {
+                self.didShowZeroPeerNotice = true
+                self.conversationUIModel.showLocalNotice(
+                    String(localized: "system.mesh.no_peers_hint", comment: "Local system line shown once when sending a mesh message with no peers in Bluetooth range")
+                )
+            }
         }
     }
 }

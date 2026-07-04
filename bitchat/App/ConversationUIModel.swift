@@ -53,6 +53,12 @@ final class ConversationUIModel: ObservableObject {
         chatViewModel.sendMessage("/clear")
     }
 
+    /// Adds a local-only system line to the public timeline. Never sent
+    /// anywhere — purely UI narration (e.g. the zero-peer send hint).
+    func showLocalNotice(_ text: String) {
+        chatViewModel.addSystemMessage(text)
+    }
+
     func sendHug(to sender: String) {
         chatViewModel.sendMessage("/hug @\(sender)")
     }

@@ -1,3 +1,4 @@
+import CoreBluetooth
 import SwiftUI
 #if os(iOS)
 import UIKit
@@ -30,6 +31,41 @@ struct ContentHeaderView: View {
     let headerPeerCountFontSize: CGFloat
 
     var body: some View {
+        VStack(spacing: 0) {
+            headerRow
+
+            if showsBluetoothStatusRow {
+                bluetoothStatusRow
+            }
+        }
+        .sheet(isPresented: $appChromeModel.isLocationChannelsSheetPresented) {
+            LocationChannelsSheet(isPresented: $appChromeModel.isLocationChannelsSheetPresented)
+                .environmentObject(locationChannelsModel)
+                .environmentObject(peerListModel)
+        }
+        .sheet(isPresented: $showLocationNotes, onDismiss: {
+            notesGeohash = nil
+        }) {
+            locationNotesSheetContent
+        }
+        .onAppear {
+            locationChannelsModel.refreshMeshChannelsIfNeeded()
+        }
+        .onChange(of: locationChannelsModel.selectedChannel) { _ in
+            locationChannelsModel.refreshMeshChannelsIfNeeded()
+        }
+        .onChange(of: locationChannelsModel.permissionState) { _ in
+            locationChannelsModel.refreshMeshChannelsIfNeeded()
+        }
+        .alert("content.alert.screenshot.title", isPresented: $appChromeModel.showScreenshotPrivacyWarning) {
+            Button("common.ok", role: .cancel) {}
+        } message: {
+            Text("content.alert.screenshot.message")
+        }
+        .themedChromePanel(edge: .top)
+    }
+
+    private var headerRow: some View {
         HStack(spacing: 0) {
             Text(verbatim: logoTitle)
                 .bitchatFont(size: 18, weight: .medium)
@@ -218,63 +254,42 @@ struct ContentHeaderView: View {
         }
         .frame(height: headerHeight)
         .padding(.horizontal, 12)
-        .sheet(isPresented: $appChromeModel.isLocationChannelsSheetPresented) {
-            LocationChannelsSheet(isPresented: $appChromeModel.isLocationChannelsSheetPresented)
+    }
+
+    private var locationNotesSheetContent: some View {
+        Group {
+            if let geohash = notesGeohash ?? locationChannelsModel.currentBuildingGeohash {
+                LocationNotesView(
+                    geohash: geohash,
+                    senderNickname: appChromeModel.nickname
+                )
                 .environmentObject(locationChannelsModel)
-                .environmentObject(peerListModel)
-        }
-        .sheet(isPresented: $showLocationNotes, onDismiss: {
-            notesGeohash = nil
-        }) {
-            Group {
-                if let geohash = notesGeohash ?? locationChannelsModel.currentBuildingGeohash {
-                    LocationNotesView(
-                        geohash: geohash,
-                        senderNickname: appChromeModel.nickname
-                    )
-                    .environmentObject(locationChannelsModel)
-                } else {
-                    ContentLocationNotesUnavailableView(
-                        showLocationNotes: $showLocationNotes,
-                        headerHeight: headerHeight
-                    )
-                    .environmentObject(locationChannelsModel)
-                }
-            }
-            .onAppear {
-                locationChannelsModel.enableLocationChannels()
-                locationChannelsModel.beginLiveRefresh()
-            }
-            .onDisappear {
-                locationChannelsModel.endLiveRefresh()
-            }
-            .onChange(of: locationChannelsModel.availableChannels) { channels in
-                if let current = channels.first(where: { $0.level == .building })?.geohash,
-                   notesGeohash != current {
-                    notesGeohash = current
-                    #if os(iOS)
-                    let generator = UIImpactFeedbackGenerator(style: .light)
-                    generator.prepare()
-                    generator.impactOccurred()
-                    #endif
-                }
+            } else {
+                ContentLocationNotesUnavailableView(
+                    showLocationNotes: $showLocationNotes,
+                    headerHeight: headerHeight
+                )
+                .environmentObject(locationChannelsModel)
             }
         }
         .onAppear {
-            locationChannelsModel.refreshMeshChannelsIfNeeded()
+            locationChannelsModel.enableLocationChannels()
+            locationChannelsModel.beginLiveRefresh()
         }
-        .onChange(of: locationChannelsModel.selectedChannel) { _ in
-            locationChannelsModel.refreshMeshChannelsIfNeeded()
+        .onDisappear {
+            locationChannelsModel.endLiveRefresh()
         }
-        .onChange(of: locationChannelsModel.permissionState) { _ in
-            locationChannelsModel.refreshMeshChannelsIfNeeded()
+        .onChange(of: locationChannelsModel.availableChannels) { channels in
+            if let current = channels.first(where: { $0.level == .building })?.geohash,
+               notesGeohash != current {
+                notesGeohash = current
+                #if os(iOS)
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.prepare()
+                generator.impactOccurred()
+                #endif
+            }
         }
-        .alert("content.alert.screenshot.title", isPresented: $appChromeModel.showScreenshotPrivacyWarning) {
-            Button("common.ok", role: .cancel) {}
-        } message: {
-            Text("content.alert.screenshot.message")
-        }
-        .themedChromePanel(edge: .top)
     }
 }
 
@@ -290,6 +305,53 @@ private extension View {
 private extension ContentHeaderView {
     var headerLineLimit: Int? {
         dynamicTypeSize.isAccessibilitySize ? 2 : 1
+    }
+
+    /// Persistent "mesh is down" indicator: shown while #mesh is selected
+    /// and Bluetooth is in a lasting bad state. The one-shot alert stays as
+    /// the recovery prompt; this row is the durable trace it leaves behind.
+    var showsBluetoothStatusRow: Bool {
+        guard case .mesh = locationChannelsModel.selectedChannel else { return false }
+        switch appChromeModel.bluetoothState {
+        case .poweredOff, .unauthorized, .unsupported:
+            return true
+        default:
+            // .unknown/.resetting are transient startup states; flagging
+            // them would flash a false "offline" on every launch.
+            return false
+        }
+    }
+
+    var bluetoothStatusText: String {
+        switch appChromeModel.bluetoothState {
+        case .unauthorized:
+            return String(localized: "content.status.bluetooth_unauthorized", comment: "Persistent header status row shown while Bluetooth permission is denied")
+        case .unsupported:
+            return String(localized: "content.status.bluetooth_unsupported", comment: "Persistent header status row shown when the device has no Bluetooth support")
+        default:
+            return String(localized: "content.status.bluetooth_off", comment: "Persistent header status row shown while Bluetooth is turned off")
+        }
+    }
+
+    var bluetoothStatusRow: some View {
+        Button(action: { SystemSettings.bluetooth.open() }) {
+            HStack(spacing: 6) {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.bitchatSystem(size: 11))
+                Text(verbatim: bluetoothStatusText)
+                    .bitchatFont(size: 12)
+                    .lineLimit(2)
+                Spacer(minLength: 0)
+            }
+            .foregroundColor(palette.alertRed)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 5)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(palette.alertRed.opacity(0.12))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(bluetoothStatusText)
     }
 
     var logoTitle: String {

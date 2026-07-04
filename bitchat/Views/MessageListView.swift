@@ -74,6 +74,9 @@ struct MessageListView: View {
 
         ScrollViewReader { proxy in
             ScrollView {
+                if messageItems.isEmpty && privatePeer == nil {
+                    publicEmptyState
+                }
                 LazyVStack(alignment: .leading, spacing: 0) {
                     ForEach(messageItems) { item in
                         let message = item.message
@@ -255,6 +258,39 @@ private extension MessageListView {
             return "dm:\(peer)"
         }
         return locationChannelsModel.selectedChannel.contextKey
+    }
+
+    /// Terminal-styled narration for an empty public timeline: says which
+    /// channel this is, that the app is waiting for peers, and where to go
+    /// next. Rendered inside the ScrollView; disappears with the first row.
+    var publicEmptyState: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            switch locationChannelsModel.selectedChannel {
+            case .mesh:
+                emptyStateLine(String(localized: "content.empty.mesh_intro", comment: "First line of the empty mesh timeline explaining what the mesh channel is"))
+                emptyStateLine(String(localized: "content.empty.mesh_waiting", comment: "Second line of the empty mesh timeline saying no peers are in range yet"))
+                emptyStateLine(String(localized: "content.empty.switch_hint", comment: "Empty timeline hint pointing at the channel switcher and the help screen"))
+            case .location(let channel):
+                emptyStateLine(
+                    String(
+                        format: String(localized: "content.empty.location_intro", comment: "First line of an empty geohash timeline naming the channel"),
+                        locale: .current,
+                        channel.geohash
+                    )
+                )
+                emptyStateLine(String(localized: "content.empty.switch_hint", comment: "Empty timeline hint pointing at the channel switcher and the help screen"))
+            }
+        }
+        .padding(.horizontal, 12)
+        .padding(.top, 12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    func emptyStateLine(_ text: String) -> some View {
+        Text(verbatim: "* \(text) *")
+            .bitchatFont(size: 13)
+            .foregroundColor(palette.secondary.opacity(0.9))
+            .fixedSize(horizontal: false, vertical: true)
     }
 
     /// Updates the unseen-count baseline for the current context and returns

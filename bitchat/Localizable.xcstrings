@@ -17536,6 +17536,54 @@
         }
       }
     },
+    "content.empty.location_intro" : {
+      "comment" : "First line of an empty geohash timeline naming the channel",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "you're in #%@ — a public location channel over the internet"
+          }
+        }
+      }
+    },
+    "content.empty.mesh_intro" : {
+      "comment" : "First line of the empty mesh timeline explaining what the mesh channel is",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "you're on #mesh — reaches people within bluetooth range"
+          }
+        }
+      }
+    },
+    "content.empty.mesh_waiting" : {
+      "comment" : "Second line of the empty mesh timeline saying no peers are in range yet",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "nobody in range yet... messages appear here"
+          }
+        }
+      }
+    },
+    "content.empty.switch_hint" : {
+      "comment" : "Empty timeline hint pointing at the channel switcher and the help screen",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tap the channel name above to switch · tap bitchat/ for help"
+          }
+        }
+      }
+    },
     "content.header.panic_armed" : {
       "comment" : "Header text shown while the panic wipe is armed and awaiting a confirming tap",
       "extractionState" : "manual",
@@ -24359,6 +24407,102 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : " (你)"
+          }
+        }
+      }
+    },
+    "content.status.bluetooth_off" : {
+      "comment" : "Persistent header status row shown while Bluetooth is turned off",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mesh offline: bluetooth is off — tap to fix"
+          }
+        }
+      }
+    },
+    "content.status.bluetooth_unauthorized" : {
+      "comment" : "Persistent header status row shown while Bluetooth permission is denied",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mesh offline: bluetooth permission denied — tap to fix"
+          }
+        }
+      }
+    },
+    "content.status.bluetooth_unsupported" : {
+      "comment" : "Persistent header status row shown when the device has no Bluetooth support",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mesh unavailable: this device has no bluetooth"
+          }
+        }
+      }
+    },
+    "first_launch.bluetooth_note" : {
+      "comment" : "First-launch intro note priming the upcoming Bluetooth permission prompt",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "next, your device will ask for bluetooth access — that's how bitchat finds people around you. no data leaves your device."
+          }
+        }
+      }
+    },
+    "first_launch.start" : {
+      "comment" : "Label of the button that leaves the first-launch intro and starts the app",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "start"
+          }
+        }
+      }
+    },
+    "first_launch.tagline_encryption" : {
+      "comment" : "Third first-launch tagline about encryption",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "private messages are end-to-end encrypted"
+          }
+        }
+      }
+    },
+    "first_launch.tagline_infrastructure" : {
+      "comment" : "Second first-launch tagline about infrastructure",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "no internet, no servers, no accounts"
+          }
+        }
+      }
+    },
+    "first_launch.tagline_mesh" : {
+      "comment" : "First first-launch tagline explaining what bitchat does",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "chat with people nearby over bluetooth mesh"
           }
         }
       }
@@ -33898,6 +34042,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "無法發送到位置頻道"
+          }
+        }
+      }
+    },
+    "system.mesh.no_peers_hint" : {
+      "comment" : "Local system line shown once when sending a mesh message with no peers in Bluetooth range",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "nobody in bluetooth range right now — your message will sync to people as they appear"
           }
         }
       }
