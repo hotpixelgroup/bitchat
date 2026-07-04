@@ -109,6 +109,20 @@ struct ContentView: View {
                 didShowZeroPeerNotice = false
             }
         }
+        .onChange(of: conversationUIModel.pendingComposerText) { staged in
+            guard let staged else { return }
+            conversationUIModel.pendingComposerText = nil
+            // Append rather than overwrite: a draft in progress survives an
+            // incoming share.
+            if messageText.isEmpty {
+                messageText = staged
+            } else if messageText.hasSuffix(" ") {
+                messageText += staged
+            } else {
+                messageText += " " + staged
+            }
+            isTextFieldFocused = true
+        }
         .sheet(
             isPresented: Binding(
                 get: { showSidebar || selectedPrivatePeerID != nil },

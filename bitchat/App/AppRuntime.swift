@@ -305,17 +305,20 @@ private extension AppRuntime {
         userDefaults.removeObject(forKey: "sharedContentType")
         userDefaults.removeObject(forKey: "sharedContentDate")
 
+        // Stage into the composer instead of sending: auto-posting would drop
+        // the content into whichever conversation happens to be active —
+        // public mesh, a geohash room, or a DM — with no chance to stop it.
         switch contentKind {
         case .url:
             if let data = sharedContent.data(using: .utf8),
                let urlData = try? JSONSerialization.jsonObject(with: data) as? [String: String],
                let url = urlData["url"] {
-                chatViewModel.sendMessage(url)
+                conversationUIModel.pendingComposerText = url
             } else {
-                chatViewModel.sendMessage(sharedContent)
+                conversationUIModel.pendingComposerText = sharedContent
             }
         case .text:
-            chatViewModel.sendMessage(sharedContent)
+            conversationUIModel.pendingComposerText = sharedContent
         }
 
         record(.sharedContentAccepted(contentKind))

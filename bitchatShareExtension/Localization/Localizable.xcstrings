@@ -475,113 +475,113 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "✓ shared link to bitchat",
-            "comment": "Confirmation after successfully sharing a link"
+            "value": "✓ saved — open bitchat to send",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "ar": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ تم إرسال الرابط إلى bitchat",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ تم الحفظ — افتح bitchat للإرسال",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "de": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ link zu bitchat geteilt",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ gespeichert — öffne bitchat zum senden",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ enlace compartido con bitchat",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ guardado — abre bitchat para enviar",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ lien partagé vers bitchat",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ enregistré — ouvrez bitchat pour envoyer",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "he": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ הקישור נשלח אל bitchat",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ נשמר — פתח את bitchat כדי לשלוח",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "id": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ tautan dikirim ke bitchat",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ tersimpan — buka bitchat untuk mengirim",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ link inviato a bitchat",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ salvato — apri bitchat per inviare",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "ja": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ bitchatにリンクを共有",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ 保存しました — 送信するにはbitchatを開いてください",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "ne": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ bitchat मा लिङ्क पठाइयो",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ सुरक्षित भयो — पठाउन bitchat खोल्नुहोस्",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "pt-BR": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ link enviado para bitchat",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ salvo — abra o bitchat para enviar",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "ru": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ ссылка отправлена в bitchat",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ сохранено — откройте bitchat, чтобы отправить",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "uk": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ посилання надіслано в bitchat",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ збережено — відкрийте bitchat, щоб надіслати",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "zh-Hans": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ 已将链接分享至 bitchat",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ 已保存 — 打开 bitchat 发送",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "ko": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ bitchat으로 링크를 공유했습니다",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ 저장됨 — 보내려면 bitchat을 여세요",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         },
         "tr": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ bitchat'e bağlantı paylaşıldı",
-            "comment": "Confirmation after successfully sharing a link"
+            "state": "needs_review",
+            "value": "✓ kaydedildi — göndermek için bitchat'i açın",
+            "comment": "Confirmation after staging a shared link; sent only after the user confirms in the app composer"
           }
         }
       }
@@ -592,113 +592,113 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "✓ shared text to bitchat",
-            "comment": "Confirmation after successfully sharing text"
+            "value": "✓ saved — open bitchat to send",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "ar": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ تم إرسال النص إلى bitchat",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ تم الحفظ — افتح bitchat للإرسال",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "de": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ text zu bitchat geteilt",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ gespeichert — öffne bitchat zum senden",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "es": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ texto compartido con bitchat",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ guardado — abre bitchat para enviar",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "fr": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ texte partagé vers bitchat",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ enregistré — ouvrez bitchat pour envoyer",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "he": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ הטקסט נשלח אל bitchat",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ נשמר — פתח את bitchat כדי לשלוח",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "id": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ teks dikirim ke bitchat",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ tersimpan — buka bitchat untuk mengirim",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "it": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ testo inviato a bitchat",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ salvato — apri bitchat per inviare",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "ja": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ bitchatにテキストを共有",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ 保存しました — 送信するにはbitchatを開いてください",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "ne": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ bitchat मा पाठ पठाइयो",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ सुरक्षित भयो — पठाउन bitchat खोल्नुहोस्",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "pt-BR": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ texto enviado para bitchat",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ salvo — abra o bitchat para enviar",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "ru": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ текст отправлен в bitchat",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ сохранено — откройте bitchat, чтобы отправить",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "uk": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ текст надіслано в bitchat",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ збережено — відкрийте bitchat, щоб надіслати",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "zh-Hans": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ 已将文本分享至 bitchat",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ 已保存 — 打开 bitchat 发送",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "ko": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ bitchat으로 텍스트를 공유했습니다",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ 저장됨 — 보내려면 bitchat을 여세요",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         },
         "tr": {
           "stringUnit": {
-            "state": "translated",
-            "value": "✓ bitchat'e metin paylaşıldı",
-            "comment": "Confirmation after successfully sharing text"
+            "state": "needs_review",
+            "value": "✓ kaydedildi — göndermek için bitchat'i açın",
+            "comment": "Confirmation after staging shared text; sent only after the user confirms in the app composer"
           }
         }
       }

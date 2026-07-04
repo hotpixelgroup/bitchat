@@ -12,6 +12,11 @@ final class ConversationUIModel: ObservableObject {
     @Published private(set) var currentNickname: String
     @Published private(set) var isBatchingPublic = false
     @Published private(set) var canSendMediaInCurrentContext = true
+    /// Text staged by the share extension. ContentView drains it into the
+    /// composer draft so the user sees the destination and confirms the send
+    /// themselves — shared content must never auto-post into whichever
+    /// conversation happens to be active.
+    @Published var pendingComposerText: String?
 
     private let chatViewModel: ChatViewModel
     private let privateConversationModel: PrivateConversationModel
