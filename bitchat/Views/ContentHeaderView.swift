@@ -67,10 +67,23 @@ struct ContentHeaderView: View {
 
     private var headerRow: some View {
         HStack(spacing: 0) {
-            Text(verbatim: logoTitle)
-                .bitchatFont(size: 18, weight: .medium)
-                .lineLimit(1)
-                .foregroundColor(panicArmed || showWipedNotice ? palette.alertRed : palette.primary)
+            HStack(spacing: 4) {
+                Text(verbatim: logoTitle)
+                    .bitchatFont(size: 18, weight: .medium)
+                    .lineLimit(1)
+                    .foregroundColor(panicArmed || showWipedNotice ? palette.alertRed : palette.primary)
+
+                // Visible cue that the logo is tappable — it is the only
+                // entry to the help sheet, and a bare wordmark reads as
+                // static branding.
+                if !panicArmed && !showWipedNotice {
+                    Image(systemName: "info.circle")
+                        .font(.bitchatSystem(size: 11))
+                        .foregroundColor(palette.secondary.opacity(0.7))
+                        .accessibilityHidden(true)
+                }
+            }
+                .contentShape(Rectangle())
                 .onTapGesture(count: 3) {
                     handlePanicGesture()
                 }

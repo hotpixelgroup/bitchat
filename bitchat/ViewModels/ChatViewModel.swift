@@ -1435,7 +1435,7 @@ final class ChatViewModel: ObservableObject, BitchatDelegate, TransportEventDele
 
     /// Processes IRC-style commands starting with '/'.
     /// - Parameter command: The full command string including the leading slash
-    /// - Note: Supports commands like /nick, /msg, /who, /slap, /clear, /help
+    /// - Note: See CommandProcessor.helpText for the supported command list
     @MainActor
     func handleCommand(_ command: String) {
         let result = commandProcessor.process(command)
